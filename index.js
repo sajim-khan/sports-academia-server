@@ -34,7 +34,6 @@ const verifyJWT = (req, res, next) => {
 // const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.vdrifst.mongodb.net/?retryWrites=true&w=majority`;
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.scgvwg0.mongodb.net/?retryWrites=true&w=majority`;
 
-
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
   serverApi: {
@@ -47,13 +46,11 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
-    const usersCollection = client.db("sportsClassDB").collection("users");
-    const sportClassClaCollection = client
-      .db("sportsClassDB")
-      .collection("class");
+    //await client.connect();
+    const usersCollection = client.db("sportsDB").collection("users");
+    const sportClassClaCollection = client.db("sportsDB").collection("class");
     const slectedClassCollection = client
-      .db("sportsClassDB")
+      .db("sportsDB")
       .collection("slectedClass");
 
     //  here is JWT
@@ -105,7 +102,7 @@ async function run() {
       }
     });
 
-    //  here is post methdor select class
+    //  here is post method select class
     app.get("/slectedClass", async (req, res) => {
       const email = req.query.email;
       if (!email) {
@@ -193,7 +190,7 @@ async function run() {
     // ----------------
 
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+    //await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!4535"
     );
